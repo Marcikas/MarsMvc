@@ -13,10 +13,13 @@ class PessoaController {
         echo json_encode($pessoa->getAll());
     }
     
-    public function new(){ 
+    public function new(){         
+        $json = file_get_contents('php://input');
+        $arrayData = json_decode($json, true);
+
         $pessoa = new \App\Entity\Pessoa(new PessoaRepository); 
-        $pessoa->setId($_POST['id']);              
-        $pessoa->setNome($_POST['nome']);        
+        $pessoa->setId($arrayData['id']);              
+        $pessoa->setNome($arrayData['nome']);        
 
         header('Content-type: application/json');  
 

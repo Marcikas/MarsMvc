@@ -1,22 +1,28 @@
 <?php
 
-class Route {
-    private static $url;
+namespace App\Config;
+
+class Route {    
     private static $controller;
 
-    public function __construct(){
-        
-    }
+    public static function __callStatic($name, $arguments){            
+        if(strcmp($arguments[0], $_SERVER['REQUEST_URI'])){            
+            return;
+        }        
 
-    public static function __callStatic($name, $arguments){
-        self::$url = $arguments[0];        
+        if(strtoupper($name) !== $_SERVER['REQUEST_METHOD']){
+            header("Content-type: application/json");
+            http_response_code(405);
+            echo json_encode([
+                "error" => "Método HTTP inválido. Esperado: $name, Obtido: " . $_SERVER['REQUEST_METHOD'] .""
+            ]);
+            exit();
+        }
+
         $data = explode('@', $arguments[1]);
         self::$controller = $data[0];
         $function = $data[1];
-        
-        // var_dump("\App\Controller\\" . (string)self::$controller);
-        // die();
-
+       
         if (class_exists("\App\Controller\\" . (string)self::$controller)) {
             $controllerName = "\App\Controller\\".(string)self::$controller;
             $controller = new $controllerName;
