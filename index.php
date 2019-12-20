@@ -1,6 +1,7 @@
 <?php
 
 require_once "config/Autoload.php";
+require_once "vendor/autoload.php";
 
 new Autoloader();
 

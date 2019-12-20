@@ -4,11 +4,10 @@ namespace App\Repository;
 
 require_once "Repository.php";
 
-class PessoaRepository {
-    use \Repository;
-   
-    public static function findAll(){
-        $statement = self::$db->prepare("SELECT * FROM pessoa");
+class PessoaRepository extends \Repository{
+       
+    public static function findAll(){        
+        $statement = self::getDb()->prepare("SELECT * FROM pessoa");
         $statement->execute();
         return $statement->fetchAll(\PDO::FETCH_CLASS);
     }
@@ -24,7 +23,7 @@ class PessoaRepository {
             return false;
         }            
 
-        $statement = self::$db->prepare("INSERT INTO pessoa VALUES(?,?)");        
+        $statement = self::getDb()->prepare("INSERT INTO pessoa VALUES(?,?)");        
         return $statement->execute([$obj->getId(), $obj->getNome()]);       
     }
 
