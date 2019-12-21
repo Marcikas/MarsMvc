@@ -4,7 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PessoaRepository;
 
-class Pessoa {
+class Pessoa
+{
     private $id;
     private $nome;
     private $repository;

@@ -21,7 +21,9 @@ class Template
     private function handle($page, $data)
     {
         $template = new Tpl();
-        if ($data) { $template->assign($data); }
+        if ($data) {
+            $template->assign($data);
+        }
         $template->draw($page);
     }
 }
