@@ -7,37 +7,45 @@ use App\Repository\PessoaRepository;
 class Pessoa {
     private $id;
     private $nome;
-    private $repository;    
+    private $repository;
 
-    public function __construct(PessoaRepository $repository){
-        $this->repository = $repository;           
+    public function __construct(PessoaRepository $repository)
+    {
+        $this->repository = $repository;
     }
 
-    public function getNome(): String{
+    public function getNome(): string
+    {
         return $this->nome;
     }
     
-    public function getId(): int{
+    public function getId(): int
+    {
         return $this->id;
     }
     
-    public function setNome(String $nome){
+    public function setNome(string $nome)
+    {
         $this->nome = $nome;
     }
     
-    public function setId(int $id){
+    public function setId(int $id)
+    {
         $this->id = $id;
     }
 
-    public function getAll(){
+    public function getAll()
+    {
         return $this->repository::findAll();
     }
     
-    public function remove(){
+    public function remove()
+    {
         return $this->repository::delete($this);
     }
     
-    public function add(){
+    public function add()
+    {
         return $this->repository::insert($this);
     }
 }

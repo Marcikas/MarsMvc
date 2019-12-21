@@ -1,14 +1,18 @@
 <?php
 
-abstract class Repository {    
+namespace App\Repository;
+
+abstract class Repository
+{
     protected static $db;
     
-    protected function getDb(){
+    protected function getDb()
+    {
         return self::$db = \App\Config\Database::getInstance();
     }
 
-    abstract static function findOneOrFail($obj);
-    abstract static function insert($obj);
-    abstract static function delete($obj);
-    abstract static function update($obj);
+    abstract protected static function findOneOrFail($obj);
+    abstract protected static function insert($obj);
+    abstract protected static function delete($obj);
+    abstract protected static function update($obj);
 }
