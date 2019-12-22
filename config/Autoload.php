@@ -19,8 +19,8 @@ class Autoloader
     private function loadDirectoryFiles(string $className)
     {
         // Pega o array com os namespaces e diretórios do arquivo de configuração
-        $data = include(__DIR__ . '\\autoloadFile\\config.php');
-
+        $data = \Symfony\Component\Yaml\Yaml::parseFile(__DIR__ . '\\autoloadFile\\config.yaml');
+        
         array_walk($data, function ($arrayData, $key, $className) {
             $len = strlen($arrayData['prefix']);
             if (strncmp($arrayData['prefix'], $className, $len) !== 0) {
