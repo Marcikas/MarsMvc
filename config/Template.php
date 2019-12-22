@@ -6,19 +6,38 @@ use Rain\Tpl;
 
 class Template
 {
-    public static function render($page, array $data = null)
+    /**
+     * Executa a configuração e a renderização do template
+     *
+     * @param string $page
+     * @param array $data
+     * @author Victor Marciano
+     */
+    public static function render(string $page, array $data = null): void
     {
         self::setTplConfig();
         self::handle($page, $data);
     }
     
-    private function setTplConfig()
+    /**
+     * Seta as pastas que conterão as views e os arquivos de cache respectivamente
+     *
+     * @author Victor Marciano
+     */
+    private function setTplConfig(): void
     {
         Tpl::configure('tpl_dir', 'Views/');
         Tpl::configure('cache_dir', 'cache/');
     }
     
-    private function handle($page, $data)
+    /**
+     * Cria uma instância do RainTpl, seta os dados e renderiza o template
+     *
+     * @param string $page
+     * @param array $data
+     * @author Victor Marciano
+     */
+    private function handle(string $page, array $data): void
     {
         $template = new Tpl();
         if ($data) {

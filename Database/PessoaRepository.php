@@ -2,8 +2,17 @@
 
 namespace App\Repository;
 
+/**
+ * Classe responsável por executar as regras de negócio da tabela 'pessoa'
+ */
 class PessoaRepository extends Repository
 {
+    /**
+     * Busca todos os registros da tabela 'pessoa'
+     *
+     * @return void
+     * @author Victor Marciano
+     */
     public static function findAll()
     {
         $statement = self::getDb()->prepare("SELECT * FROM pessoa");
@@ -11,6 +20,13 @@ class PessoaRepository extends Repository
         return $statement->fetchAll(\PDO::FETCH_CLASS);
     }
     
+    /**
+     * Undocumented function
+     *
+     * @param [type] $obj
+     * @return void
+     * @author Victor Marciano
+     */
     public static function findOneOrFail($obj)
     {
         if (!$obj instanceof \App\Entity\Pessoa) {
@@ -18,6 +34,12 @@ class PessoaRepository extends Repository
         }
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $obj
+     * @author Victor Marciano
+     */
     public static function insert($obj)
     {
         if (!$obj instanceof \App\Entity\Pessoa) {

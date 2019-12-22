@@ -11,10 +11,10 @@ class PessoaController
 {
     public function index()
     {
-        $pessoa = (new \App\Entity\Pessoa(new PessoaRepository()));
+        $pessoas = (new \App\Entity\Pessoa(new PessoaRepository()))->getAll();
         header('Content-type: application/json');
         http_response_code(200);
-        echo json_encode($pessoa->getAll());
+        echo json_encode($pessoas);
     }
     
     public function new()

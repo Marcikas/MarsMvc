@@ -10,17 +10,17 @@ class Autoloader
         spl_autoload_register([$this, "loadDirectoryFiles"]);
     }
     
-    // Carrega os arquivos presentes nos diretórios do projeto
-    private function loadDirectoryFiles($className)
+    /**
+     * Busca o arquivo a ser carregado nas pastas registradas e faz o require do mesmo
+     *
+     * @param string $className
+     * @author Victor Marciano
+     */
+    private function loadDirectoryFiles(string $className)
     {
-        // Novas pastas e namespaces criados deverão ser inseridos neste array
-        $data = [
-            ['prefix' => 'App\\Config\\', 'directory' => 'config'],
-            ['prefix' => 'App\\Controller\\', 'directory' => 'Controller'],
-            ['prefix' => 'App\\Entity\\', 'directory' => 'Entity'],
-            ['prefix' => 'App\\Repository\\', 'directory' => 'Database']
-        ];
-       
+        // Pega o array com os namespaces e diretórios do arquivo de configuração
+        $data = include(__DIR__ . '\\autoloadFile\\config.php');
+
         array_walk($data, function ($arrayData, $key, $className) {
             $len = strlen($arrayData['prefix']);
             if (strncmp($arrayData['prefix'], $className, $len) !== 0) {
